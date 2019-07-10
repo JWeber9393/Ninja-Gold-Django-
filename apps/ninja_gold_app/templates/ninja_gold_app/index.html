@@ -19,7 +19,7 @@
             height: 200px;
             width: 200px;
             background-color: black;
-            color: white;
+            color: black;
             border: 5px solid 	#D4AF37;
             border-radius: 15px;
             text-align: center;
@@ -28,35 +28,83 @@
         input{
             text-align: center;
         }
+
+        .scroll{
+            display: inline-block;
+            height: 200px;
+            width: 900px;
+            background-color: white;
+            overflow: scroll;
+        }
+
+        .green{
+            color: green;
+        }
+
+        .red{
+            color: red;
+        }
+
+        #reset{
+            border: none;
+            display: block;
+            height: auto;
+            width: 50px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
 
-        <p>Your Gold: {{request.session.gold}}</p>
+        <p>Your Gold: {{my_gold}}</p>
+
         <form action="/process_gold" method="POST">
             {% csrf_token %}
             <h2>Farm</h2>
+            <p>(earns 10-20 gold)</p>
             <input type="hidden" name="location" value="farm">
             <input type="submit" value="Find Gold!">
         </form>
+
         <form action="/process_gold" method="POST">
             {% csrf_token %}
             <h2>Cave</h2>
+            <p>(earns 5-10 gold)</p>
             <input type="hidden" name="location" value="cave">
             <input type="submit" value="Find Gold!">
         </form>
+
         <form action="/process_gold" method="POST">
             {% csrf_token %}
             <h2>House</h2>
+            <p>(earns 2-5 gold)</p>
             <input type="hidden" name="location" value="house">
             <input type="submit" value="Find Gold!">
         </form>
+
         <form action="/process_gold" method="POST">
             {% csrf_token %}
             <h2>Casino</h2>
+            <p>(earns/takes 0-50 gold)</p>
             <input type="hidden" name="location" value="casino">
             <input type="submit" value="Find Gold!">
+        </form>
+        
+        <form class="scroll" action="/process_gold" method="POST">
+            {% csrf_token %}
+            <p>Recent Activities</p>
+            <div>
+
+                {% for activity in request.session.activities_list %}
+                    <p class="{{activity.color}}" >{{activity.log}}</p>
+                {% endfor %}
+
+            </div>
+        </form>
+
+        <form id="reset" action="/reset" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="reset">
         </form>
 
     </div>
