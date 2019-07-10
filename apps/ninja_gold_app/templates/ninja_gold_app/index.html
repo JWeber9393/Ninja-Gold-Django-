@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold</title>
+    <style type="text/css">
+        .container{
+            text-align: center;
+            background-color: black;
+        }
+        p{
+            font-family: fantasy;
+            color:	#D4AF37 ;
+        }
+        form{
+            display: inline-block;
+            height: 200px;
+            width: 200px;
+            background-color: black;
+            color: white;
+            border: 5px solid 	#D4AF37;
+            border-radius: 15px;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        input{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <p>Your Gold: {{request.session.gold}}</p>
+        <form action="/process_gold" method="POST">
+            {% csrf_token %}
+            <h2>Farm</h2>
+            <input type="hidden" name="location" value="farm">
+            <input type="submit" value="Find Gold!">
+        </form>
+        <form action="/process_gold" method="POST">
+            {% csrf_token %}
+            <h2>Cave</h2>
+            <input type="hidden" name="location" value="cave">
+            <input type="submit" value="Find Gold!">
+        </form>
+        <form action="/process_gold" method="POST">
+            {% csrf_token %}
+            <h2>House</h2>
+            <input type="hidden" name="location" value="house">
+            <input type="submit" value="Find Gold!">
+        </form>
+        <form action="/process_gold" method="POST">
+            {% csrf_token %}
+            <h2>Casino</h2>
+            <input type="hidden" name="location" value="casino">
+            <input type="submit" value="Find Gold!">
+        </form>
+
+    </div>
+</body>
+</html>
